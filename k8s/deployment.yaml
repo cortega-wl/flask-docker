@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "minimal-webapp"
+  namespace: "default"
+  labels:
+    app: "minimal-webapp"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "minimal-webapp"
+  template:
+    metadata:
+      labels:
+        app: "minimal-webapp"
+    spec:
+      containers:
+      - name: "minimal-webapp-1"
+        image: "gcr.io/anthos-coppel-20a59cb2/minimal-webapp:latest"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "minimal-webapp-hpa-cvbo"
+  namespace: "default"
+  labels:
+    app: "minimal-webapp"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "minimal-webapp"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80

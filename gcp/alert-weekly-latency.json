@@ -1,0 +1,17 @@
+{
+    "name": "projects/151395389964/services/O-H7aMvyR2aSowPa0dN0wA/serviceLevelObjectives/DIRL3B13TWq4SPBkBsoaRg",
+    "displayName": "99.9% - Distribution Cut - Calendar day",
+    "goal": 0.95,
+    "calendarPeriod": "WEEK",
+    "serviceLevelIndicator": {
+      "requestBased": {
+        "distributionCut": {
+          "distributionFilter": "metric.type=\"loadbalancing.googleapis.com/l3/external/rtt_latencies\" resource.type=\"tcp_lb_rule\"",
+          "range": {
+            "min": "-Infinity",
+            "max": 700
+          }
+        }
+      }
+    }
+  }
